@@ -26,8 +26,7 @@ const App = () => {
           Eliminar Usuario
         </Boton>
       </ContenedorBotones>
-      <Modal status={modalStatus} statusChange={getModalStatus}>
-      </Modal>
+      <Modal status={modalStatus} statusChange={getModalStatus}></Modal>
       <ModalNew status={modalNewUser} statusChange={getModalNewUser}></ModalNew>
       <ModalEdit
         status={modalEditUser}
