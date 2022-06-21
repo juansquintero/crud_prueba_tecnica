@@ -1,59 +1,60 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "status": "Activo",
-      "names": "Jason Martin",
-      "last_name": "Perez Porras",
-      "tel": 3123123122,
-      "adress": "Calle 14 # 14 - 14",
-      "city": "Bogota",
-      "personal_data": [
-        "Contacto",
-        "Roberta Gomez",
-        "Maria Gonzalez"
-      ],
-      "work_data": ["Gerente General", "Vendedor", "Secretario"],
-      "study_data": ["Colgio Pepito", "Universidad Pepito"],
-      "family_data": ["Esposa", "Maria Gomez"]
-    }
-  ],
-  "users2":[
-    {
-      "id": 2,
-      "status": "Activo",
-      "names": "Sara Joahana",
-      "last_name": "Ramirez Casas",
-      "tel": 3113322441,
-      "adress": "Carrera 14 # 25 - 10",
-      "city": "Madrid",
-      "personal_data": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
-      ],
-      "work_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
-      "study_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
-      "family_data": ["Radiation resistance", "Turning tiny", "Radiation blast"]
-    }
-  ],
-  "users3":[
-    {
-      "id": 3,
-      "status": "Inactivo",
-      "names": "Maria Camila",
-      "last_name": "Monroy Gonzalez",
-      "tel": 3022033322,
-      "adress": "Avenida 1 # 23 - 45",
-      "city": "Facatativa",
-      "personal_data": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
-      ],
-      "work_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
-      "study_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
-      "family_data": ["Radiation resistance", "Turning tiny", "Radiation blast"]
-    }
-  ]
+  "users": [{
+    "id": 1,
+    "status": "Activo",
+    "names": "Jason Martin",
+    "last_name": "Perez Porras",
+    "tel": 3123123122,
+    "adress": "Calle 14 # 14 - 14",
+    "city": "Bogota",
+    "personal_data": [
+      {
+        "id": 1,
+        "family": "Roberta Gomez",
+        "work_recomendations": "Pedra Pedreros"
+      },
+      {
+        "id": 2,
+        "experience":"Semex"
+      },
+      {
+        "id": 3,
+        "wife": "Johana Mantilla"
+      }
+    ]      
+  },
+  {
+    "id": 2,
+    "status": "Activo",
+    "names": "Sara Joahana",
+    "last_name": "Ramirez Casas",
+    "tel": 3113322441,
+    "adress": "Carrera 14 # 25 - 10",
+    "city": "Madrid",
+    "personal_data": [
+      "Radiation resistance",
+      "Turning tiny",
+      "Radiation blast"
+    ],
+    "work_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
+    "study_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
+    "family_data": ["Radiation resistance", "Turning tiny", "Radiation blast"]
+  },
+  {
+    "id": 3,
+    "status": "Inactivo",
+    "names": "Maria Camila",
+    "last_name": "Monroy Gonzalez",
+    "tel": 3022033322,
+    "adress": "Avenida 1 # 23 - 45",
+    "city": "Facatativa",
+    "personal_data": [
+      "Radiation resistance",
+      "Turning tiny",
+      "Radiation blast"
+    ],
+    "work_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
+    "study_data": ["Radiation resistance", "Turning tiny", "Radiation blast"],
+    "family_data": ["Radiation resistance", "Turning tiny", "Radiation blast"]
+  }]
 }

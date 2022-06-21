@@ -3,83 +3,68 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import styled from "styled-components";
-import jsondata from "./data";
 
-
-const Modal = ({ props, children, status, statusChange }) => {
+const Modal = ({
+  props,
+  children,
+  status,
+  statusChange,
+  user_id
+}) => {
+  console.log(user_id)
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState(1);
-
-  const fetchData = () => {
-    fetch("http://localhost:3000/users")
+  const [userId, setUserId] = useState(user_id);
+  
+  const fetchData1 = async () => {
+    await fetch(`http://localhost:5000/users/`)
       .then((response) => {
         return response.json();
       })
       .then((data) => {
         setUsers(data);
-      });
-  };
-  const fetchData2 = () => {
-    fetch("http://localhost:3000/users2")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setUsers(data);
-      });
-  };
-  const fetchData3 = () => {
-    fetch("http://localhost:3000/users3")
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setUsers(data);
+        console.log(users)
       });
   };
 
-  const cambios = () =>{
-    if(userId === 1) {
-      console.log("usuario_1");
-      return fetchData();
-    }else if(userId === 2) {
-      console.log("usuario_2");
-      return fetchData2();
-    }else if(userId === 3) {
-      console.log("usuario_3");
-      return fetchData3();
-    }
+
+  const fetchData = async () => {
+    await fetch(`http://localhost:5000/`)
+      .then((response) => response.json())
+      .then((data) => setUsers(data))      
+      .catch((error) => console.log(error));
+      console.log(users)
   };
 
+  console.log(userId)
   useEffect(() => {
-    cambios()
+    fetchData1()
   }, []);
- 
-  console.log(userId);
+
 
   return (
     <>
-      {status &&
+      {status && (
         <Overlay>
-          {users.length > 0 && users.map((user) => (
-          <Container>
-            <Title>
-              <h3>Registro Nuevo Usuario</h3>
-            </Title>
-            <CloseButton onClick={() => statusChange(false)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-x"
-                viewBox="0 0 16 16"
-              >
-                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-              </svg>
-            </CloseButton>
-            
-                <Container1 >
+          {users.length > 0 &&
+            users.map((user) => (
+              <Container>
+                <Title>
+                  <h3>Registro Nuevo Usuario</h3>
+                </Title>
+                <CloseButton onClick={() => statusChange(false)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-x"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                  </svg>
+                </CloseButton>
+
+                <Container1>
                   <Image
                     src="https://images.unsplash.com/photo-1655506207889-4f130f49797f?ixid=Mnw5MTMyMXwwfDF8YWxsfDJ8fHx8fHwyfHwxNjU1NTc1NzA2&amp;ixlib=rb-1.2.1&amp;h=400"
                     alt="image"
@@ -94,12 +79,7 @@ const Modal = ({ props, children, status, statusChange }) => {
                   <Text07>Direccion</Text07>
                   <Text08>Ciudad</Text08>
                   <Text09>Apellidos</Text09>
-                  <Textinput value={userId} onChange={(e)=>setUserId(e.target.value)}  type="text" placeholder="identificacion" />
-                  <ButtonSearch>
-                    <TextButton onClick={cambios}>
-                      <span>Buscar</span>
-                    </TextButton>
-                  </ButtonSearch>
+                  <Text10>{user.id}</Text10>
                   <Text11>{user.status}</Text11>
                   <Text12>{user.names}</Text12>
                   <Text13>{user.last_name}</Text13>
@@ -107,40 +87,34 @@ const Modal = ({ props, children, status, statusChange }) => {
                   <Text15>{user.adress}</Text15>
                   <Text16>{user.city}</Text16>
                 </Container1>
-              
-            <Container2>
-              <Tabs defaultActiveKey="personal" className="user-tabs">
-                <Tab eventKey="personal" title="Personal">
-                  <h4>{user.personal_data}</h4>              
-                </Tab>
-                <Tab eventKey="laboral" title="Laboral">
-                  <h4>{user.work_data}</h4>
-                </Tab>
-                <Tab eventKey="profesional" title="Profesional">
-                  <h4>{user.study_data}</h4>
-                </Tab>
-                <Tab eventKey="familiar" title="Familiar">
-                  <h4>{user.family_data}</h4>
-                </Tab>
-              </Tabs>
-            </Container2>
-          </Container>
-          ))}
+
+                <Container2>
+                  <Tabs defaultActiveKey="personal" className="user-tabs">
+                    <Tab eventKey="personal" title="Personal">
+                      <h4>A</h4>
+                    </Tab>
+                    <Tab eventKey="laboral" title="Laboral">
+                      <h4>B</h4>
+                    </Tab>
+                    <Tab eventKey="profesional" title="Profesional">
+                      <h4>C</h4>
+                    </Tab>
+                    <Tab eventKey="familiar" title="Familiar">
+                      <h4>D</h4>
+                    </Tab>
+                  </Tabs>
+                </Container2>
+              </Container>
+            ))}
         </Overlay>
-      };
+      )}
+      ;
     </>
   );
 };
 
 export default Modal;
 
-const ButtonSearch = styled("button")({
-  top: "131px",
-  left: "500px",
-  position: "absolute",
-});
-
-const TextButton = styled("span")({});
 
 const Overlay = styled("div")({
   width: "100vw",
@@ -154,11 +128,6 @@ const Overlay = styled("div")({
   "justify-content": "center",
 });
 
-const Textinput = styled("input")({
-  top: "131px",
-  left: "300px",
-  position: "absolute",
-});
 
 const Title = styled("div")({
   display: "flex",

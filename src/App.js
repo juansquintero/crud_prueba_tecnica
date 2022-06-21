@@ -1,51 +1,114 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import styled from "styled-components";
 import Modal from "./components/modal";
 import ModalEdit from "./components/modal_edit";
-import ModalNew from "./components/modal_new";
-import ModalRemove from "./components/modal_remove";
+
 
 const App = () => {
-  const [modalStatus, getModalStatus] = useState(false);
-  const [modalNewUser, getModalNewUser] = useState(false);
-  const [modalEditUser, getModalEditNewUser] = useState(false);
-  const [modalRemoveUser, getModalRemoveUser] = useState(false);
+  const [modalStatus, getModalStatus] = useState(false);  
+  const [modalEditUser, getModalEditNewUser] = useState(false);  
+  const [userId, setUderId] = useState();
+  const [userData, setUserData] = useState([]);
 
+  const [users, setUsers] = useState([]);
+
+  const fetchData = async () => {
+    await fetch("http://localhost:5000/users")
+      .then((response) => response.json())
+      .then((data) => setUsers(data))
+      .catch((error) => console.log(error));
+  };
+
+  const onDelete = async (id) => {
+    await fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE"
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          return;
+        } else {
+          setUsers(
+            users.filter((user) => {
+              return user.id !== id;
+            })
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const modalID = (id) => {
+    getModalStatus(!modalStatus);
+    console.log(id)
+    setUderId(id);
+
+  }
   return (
-    <div>
-      <ContenedorBotones>
-        <Boton onClick={() => getModalStatus(!modalStatus)}>
-          Ver Usuario
-        </Boton>
-        <Boton onClick={() => getModalNewUser(!modalNewUser)}>
-          Crear Usuario
-        </Boton>
-        <Boton onClick={() => getModalEditNewUser(!modalEditUser)}>
-          Editar Usuario
-        </Boton>
-        <Boton onClick={() => getModalRemoveUser(!modalRemoveUser)}>
-          Eliminar Usuario
-        </Boton>
-      </ContenedorBotones>
+    <>
+      <div>
+        <ContenedorBotones>
+          <Boton onClick={() => getModalEditNewUser(!modalEditUser) }>
+            Crear Usuario
+          </Boton>
+          <Tabla>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>BOTON</th>
+              <th>BOTON</th>
+              <th>BOTON</th>
+            </tr>
+            {users.map((user, i) => (
+              <tr key={i}>
+                <td>{user.id}</td>
+                <td>{user.names}</td>
+                <td>{user.last_name}</td>
+                <td>
+                  <Boton onClick={() => modalID(user.id)}>
+                    Ver Usuario
+                  </Boton>
+                </td>
+                <td>
+                  <Boton onClick={() => getModalEditNewUser(!modalEditUser)}>
+                    Editar Usuario
+                  </Boton>
+                </td>
+                <td>
+                  <Boton onClick={() => onDelete(user.id)}>
+                    Eliminar Usuario
+                  </Boton>
+                </td>
+              </tr>
+            ))}
+          </Tabla>
+        </ContenedorBotones>
 
-      <Modal status={modalStatus} statusChange={getModalStatus}></Modal>
+        <Modal status={modalStatus} statusChange={getModalStatus} user_id={userId}></Modal>        
 
-      <ModalNew status={modalNewUser} statusChange={getModalNewUser}></ModalNew>
-      
-      <ModalEdit
-        status={modalEditUser}
-        statusChange={getModalEditNewUser}
-      ></ModalEdit>
-      <ModalRemove
-        status={modalRemoveUser}
-        statusChange={getModalRemoveUser}
-      ></ModalRemove>
-    </div>
+        <ModalEdit
+          status={modalEditUser}
+          statusChange={getModalEditNewUser}
+        ></ModalEdit>        
+      </div>
+    </>
   );
 };
 
 export default App;
+
+const Tabla = styled.tbody`
+  td,
+  th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+`;
 
 const ContenedorBotones = styled.div`
   padding: 40px;

@@ -38,12 +38,7 @@ const ModalEdit = ({props, children, status, statusChange}) => {
         <Text07>Direccion</Text07>
         <Text08>Ciudad</Text08>
         <Text09>Apellidos</Text09>
-        <Text10 type="text" placeholder='cedula'></Text10>
-        <ButtonSearch>
-          <TextButton>
-            <span>Buscar</span>            
-          </TextButton>
-        </ButtonSearch>
+        <Text10 type="text" placeholder='cedula'></Text10>        
         <Text11 type="text" placeholder='status'></Text11>
         <Text12 type="text" placeholder='Nombre'>          
         </Text12>
@@ -55,16 +50,16 @@ const ModalEdit = ({props, children, status, statusChange}) => {
       <Container2>
       <Tabs defaultActiveKey="personal" className="user-tabs">
         <Tab eventKey="personal" title="Personal">
-            <h1>Holi Personal</h1>
+            <input placeholder='Dato Personal'></input>
         </Tab>
         <Tab eventKey="laboral" title="Laboral">
-            <h1>Holi Laboral</h1>
+            <input placeholder='Dato Laboral'></input>
         </Tab>
         <Tab eventKey="profesional" title="Profesional">
-            <h1>Holi Profesional</h1>
+            <input placeholder='Dato Profesional'></input>
         </Tab>
         <Tab eventKey="familiar" title="Familiar">
-            <h1>Holi Familiar</h1>
+            <input placeholder='Dato Familiar'></input>
         </Tab>
       </Tabs>
       </Container2>
@@ -79,12 +74,6 @@ export default ModalEdit
 
 const TextButton = styled('button')({
 
-})
-
-const ButtonSearch = styled('button')({
-  top: '131px',
-  left: '500px',
-  position: 'absolute',
 })
 
 const ButtonSave = styled('button')({
