@@ -5,13 +5,10 @@ import Tabs from "react-bootstrap/Tabs";
 import styled from "styled-components";
 import jsondata from "./data";
 
-let url = "http://localhost:3000/users";
-let url2 = "http://localhost:3000/users2";
-let url3 = "http://localhost:3000/users3";
 
 const Modal = ({ props, children, status, statusChange }) => {
   const [users, setUsers] = useState([]);
-  const [userId, setUserId] = useState(users);
+  const [userId, setUserId] = useState(1);
 
   const fetchData = () => {
     fetch("http://localhost:3000/users")
@@ -41,11 +38,24 @@ const Modal = ({ props, children, status, statusChange }) => {
       });
   };
 
+  const cambios = () =>{
+    if(userId === 1) {
+      console.log("usuario_1");
+      return fetchData();
+    }else if(userId === 2) {
+      console.log("usuario_2");
+      return fetchData2();
+    }else if(userId === 3) {
+      console.log("usuario_3");
+      return fetchData3();
+    }
+  };
+
   useEffect(() => {
-        fetchData()
+    cambios()
   }, []);
  
-  
+  console.log(userId);
 
   return (
     <>
@@ -84,9 +94,9 @@ const Modal = ({ props, children, status, statusChange }) => {
                   <Text07>Direccion</Text07>
                   <Text08>Ciudad</Text08>
                   <Text09>Apellidos</Text09>
-                  <Textinput onChange={setUserId} type="text" placeholder="identificacion" />
+                  <Textinput value={userId} onChange={(e)=>setUserId(e.target.value)}  type="text" placeholder="identificacion" />
                   <ButtonSearch>
-                    <TextButton>
+                    <TextButton onClick={cambios}>
                       <span>Buscar</span>
                     </TextButton>
                   </ButtonSearch>
