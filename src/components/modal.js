@@ -6,7 +6,9 @@ import styled from "styled-components";
 import jsondata from "./data";
 
 let url = "http://localhost:3000/users";
-let url2 = "http://localhost:3000/users";
+let url2 = "http://localhost:3000/users2";
+let url3 = "http://localhost:3000/users3";
+
 const Modal = ({ props, children, status, statusChange }) => {
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState(users);
