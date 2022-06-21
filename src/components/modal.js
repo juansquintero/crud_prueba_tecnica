@@ -5,6 +5,8 @@ import Tabs from "react-bootstrap/Tabs";
 import styled from "styled-components";
 import jsondata from "./data";
 
+let url = "http://localhost:3000/users";
+let url2 = "http://localhost:3000/users";
 const Modal = ({ props, children, status, statusChange }) => {
   const [users, setUsers] = useState([]);
   const [userId, setUserId] = useState(users);
@@ -36,6 +38,7 @@ const Modal = ({ props, children, status, statusChange }) => {
         setUsers(data);
       });
   };
+
   useEffect(() => {
         fetchData()
   }, []);
@@ -43,74 +46,77 @@ const Modal = ({ props, children, status, statusChange }) => {
   
 
   return (
-    <Overlay>
-      {users.length > 0 &&
-          users.map((user) => (
-      <Container>
-        <Title>
-          <h3>Registro Nuevo Usuario</h3>
-        </Title>
-        <CloseButton onClick={() => statusChange(false)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-x"
-            viewBox="0 0 16 16"
-          >
-            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-          </svg>
-        </CloseButton>
-        
-            <Container1 >
-              <Image
-                src="https://images.unsplash.com/photo-1655506207889-4f130f49797f?ixid=Mnw5MTMyMXwwfDF8YWxsfDJ8fHx8fHwyfHwxNjU1NTc1NzA2&amp;ixlib=rb-1.2.1&amp;h=400"
-                alt="image"
-              />
-              <Text>INFORMACION</Text>
-              <Text01>Identificacion</Text01>
-              <Text02>IDENTIFICACION</Text02>
-              <Text03>Status</Text03>
-              <Text04>Nombres</Text04>
-              <Text05>CONTACTO</Text05>
-              <Text06>Telefono</Text06>
-              <Text07>Direccion</Text07>
-              <Text08>Ciudad</Text08>
-              <Text09>Apellidos</Text09>
-              <Textinput onChange={setUserId} type="text" placeholder="identificacion" />
-              <ButtonSearch>
-                <TextButton>
-                  <span>Buscar</span>
-                </TextButton>
-              </ButtonSearch>
-              <Text11>{user.status}</Text11>
-              <Text12>{user.names}</Text12>
-              <Text13>{user.last_name}</Text13>
-              <Text14>{user.tel}</Text14>
-              <Text15>{user.adress}</Text15>
-              <Text16>{user.city}</Text16>
-            </Container1>
-          
-        <Container2>
-          <Tabs defaultActiveKey="personal" className="user-tabs">
-            <Tab eventKey="personal" title="Personal">
-              <h4>{user.personal_data}</h4>              
-            </Tab>
-            <Tab eventKey="laboral" title="Laboral">
-              <h4>{user.work_data}</h4>
-            </Tab>
-            <Tab eventKey="profesional" title="Profesional">
-              <h4>{user.study_data}</h4>
-            </Tab>
-            <Tab eventKey="familiar" title="Familiar">
-              <h4>{user.family_data}</h4>
-            </Tab>
-          </Tabs>
-        </Container2>
-      </Container>
-      ))}
-    </Overlay>
+    <>
+      {status &&
+        <Overlay>
+          {users.length > 0 && users.map((user) => (
+          <Container>
+            <Title>
+              <h3>Registro Nuevo Usuario</h3>
+            </Title>
+            <CloseButton onClick={() => statusChange(false)}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </CloseButton>
+            
+                <Container1 >
+                  <Image
+                    src="https://images.unsplash.com/photo-1655506207889-4f130f49797f?ixid=Mnw5MTMyMXwwfDF8YWxsfDJ8fHx8fHwyfHwxNjU1NTc1NzA2&amp;ixlib=rb-1.2.1&amp;h=400"
+                    alt="image"
+                  />
+                  <Text>INFORMACION</Text>
+                  <Text01>Identificacion</Text01>
+                  <Text02>IDENTIFICACION</Text02>
+                  <Text03>Status</Text03>
+                  <Text04>Nombres</Text04>
+                  <Text05>CONTACTO</Text05>
+                  <Text06>Telefono</Text06>
+                  <Text07>Direccion</Text07>
+                  <Text08>Ciudad</Text08>
+                  <Text09>Apellidos</Text09>
+                  <Textinput onChange={setUserId} type="text" placeholder="identificacion" />
+                  <ButtonSearch>
+                    <TextButton>
+                      <span>Buscar</span>
+                    </TextButton>
+                  </ButtonSearch>
+                  <Text11>{user.status}</Text11>
+                  <Text12>{user.names}</Text12>
+                  <Text13>{user.last_name}</Text13>
+                  <Text14>{user.tel}</Text14>
+                  <Text15>{user.adress}</Text15>
+                  <Text16>{user.city}</Text16>
+                </Container1>
+              
+            <Container2>
+              <Tabs defaultActiveKey="personal" className="user-tabs">
+                <Tab eventKey="personal" title="Personal">
+                  <h4>{user.personal_data}</h4>              
+                </Tab>
+                <Tab eventKey="laboral" title="Laboral">
+                  <h4>{user.work_data}</h4>
+                </Tab>
+                <Tab eventKey="profesional" title="Profesional">
+                  <h4>{user.study_data}</h4>
+                </Tab>
+                <Tab eventKey="familiar" title="Familiar">
+                  <h4>{user.family_data}</h4>
+                </Tab>
+              </Tabs>
+            </Container2>
+          </Container>
+          ))}
+        </Overlay>
+      };
+    </>
   );
 };
 
@@ -167,8 +173,8 @@ const CloseButton = styled("button")({
 });
 
 const Container = styled("div")({
-  width: "1300px",
-  height: "700px",
+  width: "1000px",
+  height: "650px",
   background: "#fff",
   position: "relative",
   "border-radius": "5px",

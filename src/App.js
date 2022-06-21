@@ -15,7 +15,9 @@ const App = () => {
   return (
     <div>
       <ContenedorBotones>
-        <Boton onClick={() => getModalStatus(!modalStatus)}>Ver Usuario</Boton>
+        <Boton onClick={() => getModalStatus(!modalStatus)}>
+          Ver Usuario
+        </Boton>
         <Boton onClick={() => getModalNewUser(!modalNewUser)}>
           Crear Usuario
         </Boton>
@@ -26,8 +28,11 @@ const App = () => {
           Eliminar Usuario
         </Boton>
       </ContenedorBotones>
+
       <Modal status={modalStatus} statusChange={getModalStatus}></Modal>
+
       <ModalNew status={modalNewUser} statusChange={getModalNewUser}></ModalNew>
+      
       <ModalEdit
         status={modalEditUser}
         statusChange={getModalEditNewUser}
